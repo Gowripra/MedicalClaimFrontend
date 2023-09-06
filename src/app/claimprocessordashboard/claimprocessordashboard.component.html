@@ -1,0 +1,67 @@
+<div *ngIf="role!='ClaimsProcessor'" >Access Denied!!</div>
+<div *ngIf="role=='ClaimsProcessor'">
+<div class="card-box">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2><strong>ClaimProcessing Dashboard</strong></h2>
+        
+        <button id="butt" class="btn btn-dark" type="button" (click)="back()"  style="position:absolute;right:35px">LOGOUT</button>
+        <!-- <div class="form-group">
+          <label for="searchhere">Search:</label>
+           <input  type="text" class="form-control" name="search" id="txtbox" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="Enter your search here...."> 
+        </div> -->
+        
+      </div>
+    </div>
+    <br>
+    <pre></pre>
+  
+    <div class="row">
+      <div class="table-responsive">
+  
+        <table class="table table-bordered" id="datatable" role="grid">
+          <caption>User's Details Fetched...</caption>
+          <thead class="bg-primary text-white">
+            <tr role="row">
+              <th id="1">Claim ID</th>
+              <th id="2">Policy Number</th>
+              <th id="3">PolicyHolder Name</th>
+              <th id="4">PolicyType</th>
+              <th id="5">Claims Number</th>
+              <!-- <th id="5">Assignee</th> -->
+              <th id="6">Status</th>
+             
+            </tr>
+          </thead>
+          
+          <tbody>
+            
+              <tr *ngFor="let item of claimsdata  | paginate:{itemsPerPage:5,currentPage:p} " > <!--| filter:searchText | paginate:{itemsPerPage:5,currentPage:p}"> -->
+                <td>{{item.claimId}}</td>
+                <td>{{item.policyNumber}}</td>
+                <td>{{item.policyHolderName}}</td>
+                <td>{{item.policyType}}</td>
+                <td>{{item.claimNumber}}</td>
+                
+                <td><button class="btn btn-success" (click)="approve(item.claimId)">Approve</button> | <button class="btn btn-danger" (click)="reject(item.claimId)">Reject</button></td>
+              
+              
+            </tr>
+            <!-- <tr>
+              <pagination-controls class="pagination" (pageChange)="p=$event"></pagination-controls>
+            </tr> -->
+  
+  
+          </tbody>
+          
+        </table>
+        
+          <pagination-controls class="pagination" (pageChange)="p=$event"></pagination-controls>
+        
+          
+  
+      </div>
+    </div>
+  </div>
+  </div>

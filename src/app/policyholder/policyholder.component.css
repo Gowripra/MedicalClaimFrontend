@@ -1,0 +1,10 @@
+.center {
+    height: 70px;
+    width: 100%;
+    background-color: rgb(51, 100, 246);
+    display: flex;
+    padding-top: 10px;
+    color: white;
+    justify-content: center;
+    font-size: 30px;
+}

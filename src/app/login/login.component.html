@@ -1,0 +1,80 @@
+
+<div class="center">
+    <strong>Welcome to Healthcare ClaimProcessing</strong>
+</div>
+<div class="container">
+  <p class="moving-text">Welcome to ClaimProcessing Login Page</p>
+  <style>
+    .moving-text:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .moving-text {
+        animation: marquee 15s linear infinite;
+      }
+    }
+  </style>
+  <form class="border p-3 rounded-3" [formGroup]="f" (ngSubmit)="Login()">
+    <div class="row g-0">
+      <div class="col text-center p-28 mb-3 bg-light">
+        <span class="fs-3">Login</span>
+      </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="f.errors">The username and password is invalid..</div>
+    <div class="form-group">
+
+      <label class="required" for="username">Email</label>
+      <input type="text" name="username" id="username" placeholder="Enter your emailId" class="form-control"
+        formControlName="email">
+      <div class="text-danger" *ngIf="(email.touched || email.dirty) && email.invalid">
+        <div class="text-danger" *ngIf="email.errors?.['required']">email is required</div>
+        <div class="text-danger" *ngIf="email.errors?.['email']">enter proper email address.</div>
+        <div class="text-danger" *ngIf="email.errors?.['cannotContainSpace']">email should not contain spaces.</div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <label class="required" for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Enter your password" class="form-control"
+        formControlName="password">
+      <div class="text-danger" *ngIf="(password.touched || password.dirty) && password.invalid">
+        <div class="text-danger" *ngIf="password.errors?.['required']">password is required</div>
+        <div class="text-danger" *ngIf="password.errors?.['minlength']">password length should be between 8 to 15</div>
+        <div class="text-danger" *ngIf="password.errors?.['maxlength']">password length should be between 8 to 15</div>
+        <div class="text-danger" *ngIf="password.errors?.['cannotContainSpaces']">password should not contain spaces.</div>
+        <!-- <div class="text-danger" *ngIf="password.errors?.['pattern']">shoud contain atleast 1 lowercase,1 uppercase,1 number and specialcharacter</div> -->
+      </div>
+
+    </div>
+
+    <p>New PolicyHolder? <a href="http://localhost:4200/policy/create">Register</a> here</p>
+    <p>New ClaimProcessor? <a routerLink="/claimprocessor" routerLinkActive="active">Register</a> here</p>
+    <!-- <p>New ClaimProcessor? <a href="http://localhost:4200/claimprocessor">Register</a> here</p> -->
+    <!-- <router-outlet></router-outlet> -->
+
+    <button class="btn btn-primary" type="submit">LOGIN</button>
+    <button class="btn btn-danger" type="button">Cancel</button>
+
+
+  </form>
+  <footer>
+    <div class="text-center p-4">
+      © 2022 Copyright:
+      <a class="text-reset fw" href="https://be.cognizant.com/">cognizant.com</a>
+    </div>
+  </footer>
+
+</div>

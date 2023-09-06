@@ -1,0 +1,11 @@
+.col-sm-4{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 350px;
+}
+caption{
+    text-align: center;
+    align-items: center;
+    color: blue;
+}

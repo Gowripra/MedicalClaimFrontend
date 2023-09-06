@@ -1,0 +1,159 @@
+<div *ngIf="role!='PolicyHolder'">Access Denied!!</div>
+<div *ngIf="role=='PolicyHolder'">
+<div class="card-box">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2><strong>PolicyHolder Dashboard</strong></h2>
+        <button id="addbtn" class="btn btn-success btn-rounded" style="position:absolute ;right:350px" (click)="openModel()" data-bs-target="#myModal">NewClaim</button>
+        <button id="butt" class="btn btn-dark" type="button" (click)="back()"  style="position:absolute;right:35px">LOGOUT</button>
+        <!-- <div class="form-group">
+          <label for="searchhere">Search:</label>
+           <input  type="text" class="form-control" name="search" id="txtbox" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="Enter your search here...."> 
+        </div> -->
+        
+      </div>
+    </div>
+    <br>
+    <pre></pre>
+  
+    <div class="row">
+      <div class="table-responsive">
+  
+        <table class="table table-bordered" id="datatable" role="grid">
+          <caption>User's Details Fetched...</caption>
+          <thead class="bg-primary text-white">
+            <tr role="row">
+              <th id="1">Claim ID</th>
+              <th id="2">Policy Number</th>
+              <th id="3">PolicyHolder Name</th>
+              <th id="4">PolicyType</th>
+              <th id="5">Claims Number</th>
+              <th id="6">Status</th>
+              <!-- <th id="6">claimId</th>
+              <th id="7">cashType</th>
+              <th id="8">dateofAdmitted</th>
+              <th id="9">dateofDischarged</th>
+              <th id="10">Remaining</th> -->
+              <!-- <th id="11">Notes</th> -->
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of claimsdata | paginate:{itemsPerPage:5,currentPage:p}"> <!--| filter:searchText | paginate:{itemsPerPage:5,currentPage:p}"> -->
+              <td>{{item.claimId}}</td>
+              <td>{{item.policyNumber}}</td>
+              <td>{{item.policyHolderName}}</td>
+              <td>{{item.policyType}}</td>
+              <td>{{item.claimNumber}}</td>
+              <td>{{item.status}}</td>
+              <!-- <td>{{item.claimId}}</td>
+              <td>{{item.cashType}}</td>
+              <td>{{item.dateofAdmitted}}</td>
+              <td>{{item.dateofDischarged}}</td>
+              <td>{{item.remainingClaims}}</td> -->
+              <!-- <td>{{item.notes}}</td> -->
+            </tr>
+            <!-- <tr>
+              <pagination-controls class="pagination" (pageChange)="p=$event"></pagination-controls>
+            </tr> -->
+            
+  
+          </tbody>
+         
+        </table>
+        
+          <pagination-controls class="pagination" (pageChange)="p=$event"></pagination-controls>
+      
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">NewClaim Registration</h4>
+          <button type="button" class="btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container">
+          <form [formGroup]="register">
+            
+            
+            <div class="form-group">
+              <label for="pno">Policy Number</label>
+              <input type="text" id="pnumber" class="form-control" formControlName="policyNumber">
+              <div class="alert alert-danger" *ngIf="(policyNumber.touched || policyNumber.dirty) && policyNumber.invalid">
+                <div class="alert alert-danger" *ngIf="policyNumber.errors?.['required']">policytype is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="policyHolderName">PolicyHolder Name</label>
+              <input type="text" id="name" class="form-control" formControlName="policyHolderName" autocomplete="off" />
+              <span *ngIf="policyHolderName && policyHolderName.invalid && policyHolderName.touched" class="error">Please enter data</span>
+            </div>
+            <div class="form-group">
+              <label for="policytype">PolicyType</label>
+              <select name="policyType" class="form-control" formControlName="policyType">
+                <option value="cancer">cancer</option>
+                <option value="HIV">HIV</option>
+                <option value="Dental">Dental</option>
+                <option value="others">Others</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="(policyType.touched || policyType.dirty) && policyType.invalid">
+                <div class="alert alert-danger" *ngIf="policyType.errors?.['required']">policytype is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="doa">DateofAdmitted</label>
+              <input type="date" id="doa" class="form-control" formControlName="dateofAdmitted">
+              <div class="alert alert-danger" *ngIf="(dateofAdmitted.touched || dateofAdmitted.dirty) && dateofAdmitted.invalid">
+                  <div class="alert alert-danger" *ngIf="dateofAdmitted.errors?.['required']">DOB is required</div>
+              </div>
+            </div>
+            <pre></pre>
+            <div class="form-group">
+              <label for="cashtype">CashType:</label>
+-             
+                <input id="cashless" type="radio" value="cashless" name="cashType" formControlName="cashType" required>
+                <label for="cashless">cashless</label>
+              
+              
+                <input id="refund" type="radio" value="refund" name="cashType" formControlName="cashType" required>
+                <label for="refund">refund</label>
+              
+            </div>
+            <pre></pre>
+            <div class="form-group">
+              <label for="doc">DateofDischarged</label>
+              <input type="date" id="doc" class="form-control" formControlName="dateofDischarged">
+              <div class="alert alert-danger" *ngIf="(dateofDischarged.touched || dateofDischarged.dirty) && dateofDischarged.invalid">
+                  <div class="alert alert-danger" *ngIf="dateofDischarged.errors?.['required']">DOB is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes</label>
+              <input type="text" id="notes" class="form-control" formControlName="notes">
+              <div class="alert alert-danger" *ngIf="(notes.touched || notes.dirty) && notes.invalid">
+                <div class="alert alert-danger" *ngIf="notes.errors?.['required']">DOB is required</div>
+            </div>
+            </div>
+          </form>
+          </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [disabled]="!register.valid" (click)="NewClaim()" >Submit</button>
+          <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  </div>

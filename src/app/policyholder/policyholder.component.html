@@ -1,0 +1,123 @@
+<div class="card-box">
+    <form class="border p-3 rounded-3" [formGroup]="register" (ngSubmit)="policyregister()">
+      <div class="center">
+        <strong>PolicyHolder can Register Here..</strong>
+      </div>
+      <button class="btn btn-dark" type="button" (click)="back()">GoBack</button>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+          <div class="form-group">
+            <label for="membername">PolicyHolder Name</label>
+            <input type="text" id="name" class="form-control" formControlName="policyHolderName" autocomplete="off" />
+            <span *ngIf="policyHolderName && policyHolderName.invalid && policyHolderName.touched" class="error">Please enter data</span>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" class="form-control" formControlName="age" autocomplete="off" />
+            <div class="alert alert-danger" *ngIf="(age.touched || age.dirty) && age.invalid">
+              <div class="alert alert-danger" *ngIf="age.errors?.['required']">age is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+          <div class="form-group">
+            <label for="sex">Gender</label>
+            <select name="sex" class="form-control" formControlName="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="others">Others</option>
+              <option value="not">Not to disclose</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="(gender.touched || gender.dirty) && gender.invalid">
+              <div class="alert alert-danger" *ngIf="gender.errors?.['required']">gender field is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+            <div class="form-group">
+                <label for="dob">DateofBirth</label>
+                <input type="date" id="dob" class="form-control" formControlName="dateofBirth">
+                <div class="alert alert-danger" *ngIf="(dateofBirth.touched || dateofBirth.dirty) && dateofBirth.invalid">
+                    <div class="alert alert-danger" *ngIf="dateofBirth.errors?.['required']">DOB is required</div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+          <div class="form-group">
+            <label for="username">Email</label>
+            <input type="text" id="username" class="form-control" formControlName="email" autocomplete="off" />
+            <div class="alert alert-danger" *ngIf="(email.touched || email.dirty) && email.invalid">
+              <div class="alert alert-danger" *ngIf="email.errors?.['required']">Email is required</div>
+              <div class="alert alert-danger" *ngIf="email.errors?.['email']">enter proper email address</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password"
+              autocomplete="off" />
+            <div class="alert alert-danger"
+              *ngIf="(password.touched || password.dirty) && password.invalid">
+              <div class="alert alert-danger" *ngIf="password.errors?.['required']">password is required</div>
+              <div class="text-danger" *ngIf="password.errors?.['minlength']">password length should be between 8 to 15</div>
+              <div class="text-danger" *ngIf="password.errors?.['maxlength']">password length should be between 8 to 15</div>
+              <div class="text-danger" *ngIf="password.errors?.['pattern']">shoud contain atleast 1 lowercase,1 uppercase,1 number and specialcharacter</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+          <div class="form-group">
+            <label for="status">Policy Type</label>
+            <select name="maritalstatus" class="form-control" formControlName="policyType">
+              <option value="single">cancer</option>
+              <option value="married">HIV</option>
+              <option value="divorced">Dental</option>
+              <option value="others">Others</option>
+            </select>
+            <div class="alert alert-danger"
+              *ngIf="(policyType.touched || policyType.dirty) && policyType.invalid">
+              <div class="alert alert-danger" *ngIf="policyType.errors?.['required']">policytype is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-2">
+          <br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!register.valid">Submit</button>
+          </div>
+        </div>
+        <div class="offset-lg-3 col-lg-2">
+          <br>
+          <div class="form-group">
+            <button type="button" class="btn btn-danger btn-lg btn-block">Cancel</button>
+          </div>
+        </div>
+        <!-- <div class="col-lg-3">
+          <br>
+          <span class={{messageclass}}>{{message}}</span>
+        </div> -->
+      </div>
+      
+    </form>
+  
+  </div>
