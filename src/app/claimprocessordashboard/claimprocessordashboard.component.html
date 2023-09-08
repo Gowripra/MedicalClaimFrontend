@@ -3,7 +3,17 @@
 <div class="card-box">
     <div class="row">
       <div class="col-sm-4">
-        <h2><strong>ClaimProcessing Dashboard</strong></h2>
+        <h2><strong>ClaimProcessor Dashboard</strong></h2>
+
+        <div class="date-range-filter" style="position:absolute ;right:350px">
+          <label for="dateRange">Select Date:</label>
+          <select id="dateRange" >
+            <option value="today">Today</option>
+            <option value="lastWeek">Last Week</option>
+            <option value="lastMonth">Last Month</option>
+            <option value="last90Days">Last 90 Days</option>
+          </select>
+        </div>
         
         <button id="butt" class="btn btn-dark" type="button" (click)="back()"  style="position:absolute;right:35px">LOGOUT</button>
         <!-- <div class="form-group">
@@ -31,13 +41,14 @@
               <th id="5">Claims Number</th>
               <!-- <th id="5">Assignee</th> -->
               <th id="6">Status</th>
+              <th id="7">DateofDischarged</th>
              
             </tr>
           </thead>
           
           <tbody>
             
-              <tr *ngFor="let item of claimsdata  | paginate:{itemsPerPage:5,currentPage:p} " > <!--| filter:searchText | paginate:{itemsPerPage:5,currentPage:p}"> -->
+              <tr *ngFor="let item of claimsdata  | paginate:{itemsPerPage:5,currentPage:p} "> <!--| filter:searchText | paginate:{itemsPerPage:5,currentPage:p}"> -->
                 <td>{{item.claimId}}</td>
                 <td>{{item.policyNumber}}</td>
                 <td>{{item.policyHolderName}}</td>
@@ -45,7 +56,7 @@
                 <td>{{item.claimNumber}}</td>
                 
                 <td><button class="btn btn-success" (click)="approve(item.claimId)">Approve</button> | <button class="btn btn-danger" (click)="reject(item.claimId)">Reject</button></td>
-              
+                <td>{{item.dateofDischarged}}</td>
               
             </tr>
             <!-- <tr>

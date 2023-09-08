@@ -2,9 +2,21 @@ export class LoginResponse{
     email!:string
     role!:string
     jwt!:string
-    constructor(email:string,role:string,jwt:string){
-        this.email=email;
-        this.role=role;
-        this.jwt=jwt;
+    policynumber!:number
+    policyholdername!:string
+    constructor(email:string,role:string,jwt:string,policynumber:number,policyholdername:string){
+        if(role=="PolicyHolder")
+        {
+            this.email=email;
+            this.role=role;
+            this.jwt=jwt;
+            this.policynumber=policynumber;
+            this.policyholdername=policyholdername;
+        }
+        else{
+            this.email=email;
+            this.role=role;
+            this.jwt=jwt;
+        }
     }
 }

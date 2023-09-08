@@ -15,10 +15,11 @@ import {JwtModule} from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ClaimprocessordashboardComponent } from './claimprocessordashboard/claimprocessordashboard.component';
 
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { NgxPaginationModule } from 'ngx-pagination';
-//import { MatDialogModule } from '@angular/material/dialog'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+
 export function tokenGetter(){
   return localStorage.getItem("jwt");
 }
@@ -32,13 +33,16 @@ export function tokenGetter(){
     PolicyholderdashboardComponent,
     PolicyComponent,
     ClaimprocessordashboardComponent,
+    HomeComponent,
    
 
   ],
   imports: [
   //  Ng2SearchPipeModule,
+    
     NgxPaginationModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule.forRoot([]),
@@ -50,7 +54,7 @@ export function tokenGetter(){
         disallowedRoutes:[]
       }
     }),
-   
+    
    
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService,multi:true},],

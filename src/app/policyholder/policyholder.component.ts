@@ -48,6 +48,17 @@ export class PolicyholderComponent implements OnInit {
   get policyType():FormControl{
     return this.register.get('policyType') as FormControl;
   }
+  clear(){
+    this.register=new FormGroup({
+      policyHolderName:new FormControl(''),
+      age:new FormControl(''),
+      gender:new FormControl(''),
+      dateofBirth:new FormControl(''),
+      email:new FormControl(''),
+      password:new FormControl(''),
+      policyType:new FormControl(''),
+    })
+  }
 
   ngOnInit(): void {
     this.adddetails=false;

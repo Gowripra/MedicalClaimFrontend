@@ -70,5 +70,41 @@ export class ClaimprocessordashboardComponent implements OnInit {
     localStorage.removeItem("email");
     this.router.navigate(['login']);
   }
-
+  onDate(selected:string){
+    const currentDate=new Date();
+    switch(selected){
+      case 'today':
+        this.filterData(currentDate,currentDate);
+        break;
+      case 'lastWeek':
+        const lastweekdate=new Date(currentDate);
+        lastweekdate.setDate(currentDate.getDate()-7);
+        this.filterData(lastweekdate,currentDate);
+        break;
+      case 'lastMonth':
+        const lastmonthdate=new Date(currentDate);
+        lastmonthdate.setMonth(currentDate.getMonth()-1);
+        this.filterData(lastmonthdate,currentDate);
+        break;
+      case 'last90Days':
+        const last90days=new Date(currentDate);
+        last90days.setDate(currentDate.getDate()-90);
+        this.filterData(last90days,currentDate);
+        break;
+      default:
+        break;
+    }
+  }
+  filterData(startDate:Date,endDate:Date){
+    const data=[
+      {id:1,date:new Date('2023-09-01')},
+      {id:2,date:new Date('2023-09-05')},
+      {id:3,date:new Date('2023-09-15')},
+    ];
+    const filteredata=data.filter((item)=>{
+      const itemdate=new Date(item.date);
+      return itemdate>=startDate&&itemdate<=endDate;
+    });
+    
+  }
 }

@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   invalidLogin!:boolean
   loginresponse:any
   user!:User
+  policyNumber:any;
+  policyHolderName:any;
   constructor(private route:Router,private service:UserService,private httpClient:HttpClient) { }
   f=new FormGroup({
     email:new FormControl('',[Validators.required,Validators.email,UsernameValidators.cannotContainSpace]),
@@ -31,6 +33,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.invalidLogin=false;
   }
+  clear(){
+    this.f=new FormGroup({
+      email:new FormControl(''),
+      password:new FormControl('')
+    });
+  }
+  // showsuccess(){
+  //   this.toastr.success('Login Success','success',{timeOut:1000});
+  // }
   // showfailure(){
   //   this.toastr.error('Invalid credentials','Try again',{timeOut:10000});
   // } 
@@ -45,24 +56,36 @@ export class LoginComponent implements OnInit {
         const statuscode=(<any>res).StatusCode;
         localStorage.setItem("jwt",this.loginresponse.token);
         localStorage.setItem("role",this.loginresponse.role);
-        localStorage.setItem("error",String(this.loginresponse.error));
+        //localStorage.setItem("error",String(this.loginresponse.error));
         localStorage.setItem("email",this.user.email);
+        if(this.loginresponse.role=="PolicyHolder")
+        {
+          localStorage.setItem("policyNumber",this.loginresponse.policyNumber);
+          localStorage.setItem("policyHolderName",this.loginresponse.policyHolderName);
+          localStorage.setItem("policyType",this.loginresponse.policyType);
+        }
         this.invalidLogin=false;
         console.log(this.loginresponse.token);
         console.log(this.loginresponse.role);
         console.log(this.loginresponse.error);
         //this.route.navigate([]);
         if(this.loginresponse.role=="ClaimsProcessor"){
+          //this.showsuccess();
           this.route.navigate(["/claimdashboard"]);
         }
         else{
-          this.route.navigate(["/policy"]);
+          //this.showsuccess();
+          this.route.navigate(["/policydashboard"]);
         }
         
       },err=>{
         this.invalidLogin=true;
+        //this.showfailure();
       }
     )
+  }
+  back(){
+    this.route.navigate(['home']);
   }
   // condition(){
   //   localStorage.setItem("role",this.loginresponse.role);

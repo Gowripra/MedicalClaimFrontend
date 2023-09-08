@@ -32,6 +32,13 @@ export class ClaimprocessorComponent implements OnInit {
   get password():FormControl{
     return this.register.get('password') as FormControl;
   }
+  clear(){
+    this.register=new FormGroup({
+      fullName:new FormControl(''),
+      email:new FormControl(''),
+      password:new FormControl('')
+    });
+  }
   ngOnInit(): void {
     this.adddetails=false;
     this.role=String(localStorage.getItem("role"));
